@@ -101,3 +101,47 @@ aws dynamodb create-table \
 ```
 
 
+Let's confirm those tables were actually created. Run these wait commands, and wait until they all run and end:
+```
+aws dynamodb wait table-exists --table-name ContentCatalog
+aws dynamodb wait table-exists --table-name Forum
+aws dynamodb wait table-exists --table-name Post
+aws dynamodb wait table-exists --table-name Comment
+
+```
+***What are wait commands?***
+When you run a wait command, you're telling your terminal to keep waiting until a condition is finally met. In our case, we're saying "keep waiting - don't finish running this command until this table has been created."
+
+Wait commands are helpful for making sure necessary resources have been created before you move on. Otherwise, future commands that depend on your resources would automatically fail!
+
+You should see and verify Tables created by checking DynamoDB.
+![Screenshot (24)](https://github.com/user-attachments/assets/2b36a22b-63be-48fc-bf99-020913029543)
+
+
+## Step 4 ##
+### Load Data into Your Tables
+In this step, you're going to:
+1. Load some data into DynamoDB tables.
+2. View and update your loaded data.
+Tables created but are empty. Tables need needs Items and Attributes.
+<img width="966" alt="load data architecture-diagram" src="https://github.com/user-attachments/assets/ecb4b2e6-dd10-47a7-a4d1-d350f3128979">
+
+In CloudShell terminal
+
+```
+curl -O https://storage.googleapis.com/nextwork_course_resources/courses/aws/AWS%20Project%20People%20projects/Project%3A%20Query%20Data%20with%20DynamoDB/nextworksampledata.zip
+
+unzip nextworksampledata.zip
+
+cd nextworksampledata
+
+```
+run ***ls command*** to confirm that all files are now inside your CloudShell environment:
+
+Run ***cat Forum.json**
+
+![Screenshot (25)](https://github.com/user-attachments/assets/145db7f3-c7a1-4865-bd52-ad9cf193fbfb)
+
+![Screenshot (26)](https://github.com/user-attachments/assets/dd12c2bb-a052-41b2-bb52-3d58830a2e9d)
+
+Stopped @ 1.05.00 on video
