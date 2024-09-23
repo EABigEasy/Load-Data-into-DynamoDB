@@ -144,4 +144,78 @@ Run ***cat Forum.json**
 
 ![Screenshot (26)](https://github.com/user-attachments/assets/dd12c2bb-a052-41b2-bb52-3d58830a2e9d)
 
-Stopped @ 1.05.00 on video
+Load the data of all four files into DynamoDB using AWS CLI's 
+***batch-write-item*** command:
+ 
+```
+aws dynamodb batch-write-item --request-items file://ContentCatalog.json
+
+aws dynamodb batch-write-item --request-items file://Forum.json
+
+aws dynamodb batch-write-item --request-items file://Post.json
+
+aws dynamodb batch-write-item --request-items file://Comment.json
+
+```
+
+💡 What does this command  do?
+The ***aws dynamodb batch-write-item*** command is used to load or insert multiple items into DynamoDB tables!
+
+ ***--request-items***tells DynamoDB that the items are currently stored inside a file that it'll need to retrieve from.
+
+ ***file://*** then tells DynamoDB that the file is stored locally in the CloudShell environment, with the name FILENAME.json.
+
+💡 How does DynamoDB know which table to store which data?
+Each .json file you upload tells DynamoDB which table the items should go to!
+
+
+💡 What's an Unprocessed Item?
+Unprocessed items are records that weren't written to your database! If you see an unprocessed item, an error happened while loading your data into DynamoDB.
+
+
+#### View and update your loaded data ####
+
+- Head back to the DynamoDB console.
+- Select Tables from the left hand navigation panel.
+- Pick the ContentCatalog table. ( Refresh/reload if you don't see anything first)
+- Select Explore table items on the top right.
+- Wooooohoo! Your items are now on display
+
+
+Click Add new attribute, select String from the dropdown.
+Name the new attribute ***StudentsComplete***
+For the value, enter ***Nikko***
+![Screenshot (28)](https://github.com/user-attachments/assets/24cb5839-480f-4d29-b8ce-f647547a13ec)
+![Screenshot (29)](https://github.com/user-attachments/assets/7b22dcd1-fae6-4db5-9c7a-3771c92cf2df)
+![Screenshot (30)](https://github.com/user-attachments/assets/7259f8ca-bf5f-4b7d-b580-e31c4605806e)
+![Screenshot (31)](https://github.com/user-attachments/assets/de752b90-ca3e-415f-b45d-5d97179bc8c6)
+
+
+#### Difference between DynamoDB and a Relational DB ####
+###### What's the difference between this and a relational database?######
+Relational databases would need each row to have the same number of columns. So if you added StudentsComplete as a new column in a relational database, every item in that database would need to have a StudentsComplete value too, even if it doesn't apply.
+
+This has huge impacts on a DynamoDB vs a relational database's flexibility and speed!
+
+**Flexibility** - every item having their own unique set of attributes is a huge advantage when items in a table could look different from each other. For example, e-commerce sites and shopping carts need to store different types of products with different attributes in the same place.
+**Speed** - DynamoDB tables can use partition keys to split up a table and quickly find the items they're looking for. Relational databases have to scan through the entire table to find data, which can slow down performance.
+
+##### When would someone pick relational databases over non-relational?#####
+Relational databases use SQL, which makes handling complex queries a lot more straightforward!
+
+The strictness of a relational database's schema also means data is kept precise, accurate and consistent, which can be helpful for situations where the quality of data is a top priority (e.g. healthcare systems often opt for relational databases to keep patient records).
+
+
+## Step 5 ##
+### Delete Your Resources###
+You can delete each table from management console one by one or  try delete your tables using AWS CloudShell!
+This command will delete all of their items too
+
+```
+aws dynamodb delete-table --table-name Comment
+aws dynamodb delete-table --table-name Forum
+aws dynamodb delete-table --table-name ContentCatalog
+aws dynamodb delete-table --table-name Post
+aws dynamodb delete-table --table-name NextWorkStudents
+
+```
