@@ -192,7 +192,7 @@ For the value, enter ***Nikko***
 
 
 #### Difference between DynamoDB and a Relational DB ####
-###### What's the difference between this and a relational database?######
+###### What's the difference between this and a relational database?
 Relational databases would need each row to have the same number of columns. So if you added StudentsComplete as a new column in a relational database, every item in that database would need to have a StudentsComplete value too, even if it doesn't apply.
 
 This has huge impacts on a DynamoDB vs a relational database's flexibility and speed!
@@ -200,14 +200,14 @@ This has huge impacts on a DynamoDB vs a relational database's flexibility and s
 **Flexibility** - every item having their own unique set of attributes is a huge advantage when items in a table could look different from each other. For example, e-commerce sites and shopping carts need to store different types of products with different attributes in the same place.
 **Speed** - DynamoDB tables can use partition keys to split up a table and quickly find the items they're looking for. Relational databases have to scan through the entire table to find data, which can slow down performance.
 
-##### When would someone pick relational databases over non-relational?#####
+##### When would someone pick relational databases over non-relational?
 Relational databases use SQL, which makes handling complex queries a lot more straightforward!
 
 The strictness of a relational database's schema also means data is kept precise, accurate and consistent, which can be helpful for situations where the quality of data is a top priority (e.g. healthcare systems often opt for relational databases to keep patient records).
 
 
 ## Step 5 ##
-### Delete Your Resources###
+### Delete Your Resources
 You can delete each table from management console one by one or  try delete your tables using AWS CloudShell!
 This command will delete all of their items too
 
